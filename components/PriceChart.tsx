@@ -142,7 +142,10 @@ export default function PriceChart() {
                 color: "#ffffff",
               }}
               labelStyle={{ color: "#cbd5e1" }}
-              formatter={(value: number) => [`$${value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, "Price"]}
+              formatter={(value: number | undefined) => {
+                if (value === undefined) return ["--", "Price"];
+                return [`$${value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, "Price"];
+              }}
               labelFormatter={(label) => {
                 const date = new Date(label);
                 return date.toLocaleString("zh-CN", {
